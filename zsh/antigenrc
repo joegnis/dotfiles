@@ -1,0 +1,28 @@
+# Load the oh-my-zsh's library.
+antigen use oh-my-zsh
+
+# Bundles from the default repo (robbyrussell's oh-my-zsh).
+antigen bundle git
+antigen bundle heroku
+antigen bundle pip
+antigen bundle lein
+antigen bundle command-not-found
+
+# Syntax highlighting bundle.
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+# Useful function to quickly add virtualenv prompt in themes
+antigen bundle tonyseek/oh-my-zsh-virtualenv-prompt
+
+# Load the theme.
+antigen theme ys
+
+# Allow local customizations in ~/.zsh/antigenrc_local
+if [ -f ~/.zsh/antigenrc_local ]; then
+    source ~/.zsh/antigenrc_local
+fi
+
+# Tell antigen that you're done.
+antigen apply
+
+# vim: ft=zsh

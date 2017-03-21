@@ -1,0 +1,24 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- clean: ['~']
+
+- link:
+    ~/.vimrc:
+    ~/.vim/after:
+        path: vim/after
+    ~/.vim/UltiSnips:
+        path: vim/UltiSnips
+    ~/.shell/aliases.sh:
+        path: shell/aliases.sh
+    ~/.zshrc:
+    ~/.zsh/antigenrc:
+        path: zsh/antigenrc
+    ~/.zsh/themes:
+        path: zsh/themes
+    ~/.bashrc:
+    ~/.bash_profile:
+    ~/.bash/bashitrc:
+        path: bash/bashitrc
