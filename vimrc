@@ -404,7 +404,7 @@ nnoremap <silent> <leader>z :Goyo<cr>
 let g:jedi#show_call_signatures = "2"
 
 " vim-pyenv
-if jedi#init_python()
+silent! if jedi#init_python()
   function! s:jedi_auto_force_py_version() abort
     let major_version = pyenv#python#get_internal_major_version()
     call jedi#force_py_version(major_version)
@@ -434,7 +434,7 @@ autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
 " Choose a color scheme
 " To list available color schemes, type :colo<C-d>
 set bg=dark
-colorscheme solarized
+silent! colorscheme solarized
 let g:solarized_contrast="high"
 
 " vim-sandwich
