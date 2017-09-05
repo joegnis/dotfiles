@@ -14,6 +14,8 @@
         path: vim/after
     ~/.vim/UltiSnips:
         path: vim/UltiSnips
+    ~/.config/nvim/init.vim:
+        path: neovim/init.vim
     ~/.shell/aliases.sh:
         path: shell/aliases.sh
     ~/.zshrc:

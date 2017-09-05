@@ -14,6 +14,7 @@
 "    -> Plugins
 "    -> Misc
 "    -> Helper functions
+"    -> Neovim settings
 "    -> Load local customizations
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -44,13 +45,10 @@ nmap <leader>w :w!<cr>
 set so=7
 
 " Avoid garbled characters in Chinese language windows OS
-let $LANG='en' 
+let $LANG='en'
 set langmenu=en
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
-
-" Turn on the Wild menu
-set wildmenu
 
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
@@ -70,23 +68,23 @@ set whichwrap+=<,>,h,l
 " Ignore case when searching
 set ignorecase
 
-" When searching try to be smart about cases 
+" When searching try to be smart about cases
 set smartcase
 
 " Highlight search results
 set hlsearch
 
 " Makes search act like search in modern browsers
-set incsearch 
+set incsearch
 
 " Don't redraw while executing macros (good performance config)
-set lazyredraw 
+set lazyredraw
 
 " For regular expressions turn magic on
 set magic
 
 " Show matching brackets when text indicator is over them
-set showmatch 
+set showmatch
 " How many tenths of a second to blink when matching brackets
 set mat=2
 
@@ -114,20 +112,26 @@ set linebreak
 " Hide buffers when they are abandoned
 set hid
 
+" Search down into subdirectories
+set path+=**
+
+" Display all matching files when we tab complete
+set wildmenu
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
-syntax enable 
+syntax enable
 
 " Enable 256 colors palette in Gnome Terminal
 if $COLORTERM == 'gnome-terminal'
     set t_Co=256
 endif
 
-if exists('$TMUX') 
-    set term=screen-256color 
+if exists('$TMUX') && !has('nvim')
+    set term=screen-256color
 endif
 
 " Set extra options when running in GUI mode
@@ -189,11 +193,9 @@ set si "Smart indent
 set wrap "Wrap lines
 
 " Access to system clipboard
-if has('gui_gtk3') " On X Window system, e.g. Fedora
-    noremap <leader>y "+y
-    noremap <leader>yy "+Y
-    noremap <leader>p :set paste<CR>"+gP:set nopaste<CR>
-endif
+noremap <leader>y "+y
+noremap <leader>yy "+Y
+noremap <leader>p :set paste<CR>"+gP:set nopaste<CR>
 
 
 """"""""""""""""""""""""""""""
@@ -215,7 +217,7 @@ cno $j e ./
 cno $c e <C-\>eCurrentFileDir("e")<cr>
 
 " $q is super useful when browsing on the command line
-" it deletes everything until the last slash 
+" it deletes everything until the last slash
 cno $q <C-\>eDeleteTillSlash()<cr>
 
 
@@ -248,7 +250,7 @@ map <leader>h :bprevious<cr>
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-" Specify the behavior when switching between buffers 
+" Specify the behavior when switching between buffers
 try
 set switchbuf=useopen,usetab,newtab
 set stal=2
@@ -281,9 +283,7 @@ exe "normal mz"
 %s/\s\+$//ge
 exe "normal `z"
 endfunc
-autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.coffee :call DeleteTrailingWS()
-autocmd BufWrite *.html :call DeleteTrailingWS()
+autocmd BufWrite * :call DeleteTrailingWS()
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -323,31 +323,35 @@ endif
 " Files and directories
 Plug 'jlanzarotta/bufexplorer'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'mru.vim'
+" Plug 'mru.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 " Coding
+Plug 'scrooloose/syntastic'
+Plug 'othree/csscomplete.vim'
+
+" Python
 Plug 'davidhalter/jedi-vim' | Plug 'lambdalisue/vim-pyenv' " Python
 Plug 'vim-python/python-syntax'
-Plug 'scrooloose/syntastic'
-Plug 'othree/csscomplete.vim' 
 
 " Text objects
-Plug 'machakann/vim-sandwich' 
+Plug 'kana/vim-textobj-user' " Dependency
+Plug 'machakann/vim-sandwich'
 Plug 'chaoren/vim-wordmotion' " change the definition of a 'word' when moving in vim
 Plug 'tweekmonster/braceless.vim' " For languages that use indentation
+Plug 'sgur/vim-textobj-parameter'
 
 " Color schemes
 Plug 'fugalh/desert.vim'
-Plug 'rhysd/vim-color-spring-night' 
-Plug 'altercation/vim-colors-solarized' 
+Plug 'rhysd/vim-color-spring-night'
+Plug 'altercation/vim-colors-solarized'
 
 " Git
-Plug 'airblade/vim-gitgutter' 
+Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
 " Helpers
-Plug 'tpope/vim-eunuch' 
+Plug 'tpope/vim-eunuch'
 
 " tmux
 Plug 'tmux-plugins/vim-tmux' " syntax hightlighting and more
@@ -355,6 +359,15 @@ Plug 'christoomey/vim-tmux-navigator' " seamless navigation between tmux and vim
 
 " Start Screen
 Plug 'mhinz/vim-startify'
+
+" Local config
+Plug 'embear/vim-localvimrc'
+
+" ctag
+Plug 'majutsushi/tagbar'
+
+" cscope
+Plug 'brookhong/cscope.vim'
 
 " Line break
 set linebreak
@@ -392,7 +405,7 @@ map <leader>nf :NERDTreeFind<cr>
 
 " Git gutter
 let g:gitgutter_enabled=0
-nnoremap <silent> <leader>d :GitGutterToggle<cr>
+nnoremap <silent> <leader>gg :GitGutterToggle<cr>
 
 " Goyo
 let g:goyo_width=100
@@ -401,20 +414,10 @@ let g:goyo_margin_bottom = 2
 nnoremap <silent> <leader>z :Goyo<cr>
 
 " jedi-vim
-let g:jedi#show_call_signatures = "2"
+" Moved to after/ftplugin/python.vim
 
 " vim-pyenv
-silent! if jedi#init_python()
-  function! s:jedi_auto_force_py_version() abort
-    let major_version = pyenv#python#get_internal_major_version()
-    call jedi#force_py_version(major_version)
-  endfunction
-  augroup vim-pyenv-custom-augroup
-    autocmd! *
-    autocmd User vim-pyenv-activate-post   call s:jedi_auto_force_py_version()
-    autocmd User vim-pyenv-deactivate-post call s:jedi_auto_force_py_version()
-  augroup END
-endif
+" Moved to after/ftplugin/python.vim
 
 " Syntastic
 set statusline+=%#warningmsg#
@@ -431,6 +434,9 @@ let python_highlight_all = 1
 " Omni complete functions
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
 
+" TagBar
+nmap <leader>t :TagbarToggle<CR>
+
 " Choose a color scheme
 " To list available color schemes, type :colo<C-d>
 set bg=dark
@@ -439,7 +445,7 @@ let g:solarized_contrast="high"
 
 " vim-sandwich
 " Disable s, use cl instead
-nmap s <Nop> 
+nmap s <Nop>
 xmap s <Nop>
 
 " wordmotion
@@ -456,6 +462,34 @@ let g:wordmotion_mappings = {
 " Turn on for indented languages
 autocmd FileType python,coffee BracelessEnable +indent +highlight-cc
 let g:braceless_block_key = 'i'
+
+" Cscope settings
+nnoremap <C-\>a :call CscopeFindInteractive(expand('<cword>'))<CR>
+nnoremap <C-\>l :call ToggleLocationList()<CR>
+" s: Find this C symbol
+nnoremap  <C-\>s :call CscopeFind('s', expand('<cword>'))<CR>
+" g: Find this definition
+nnoremap  <C-\>g :call CscopeFind('g', expand('<cword>'))<CR>
+" d: Find functions called by this function
+nnoremap  <C-\>d :call CscopeFind('d', expand('<cword>'))<CR>
+" c: Find functions calling this function
+nnoremap  <C-\>c :call CscopeFind('c', expand('<cword>'))<CR>
+" t: Find this text string
+nnoremap  <C-\>t :call CscopeFind('t', expand('<cword>'))<CR>
+" e: Find this egrep pattern
+nnoremap  <C-\>e :call CscopeFind('e', expand('<cword>'))<CR>
+" f: Find this file
+nnoremap  <C-\>f :call CscopeFind('f', expand('<cword>'))<CR>
+" i: Find files #including this file
+nnoremap  <C-\>i :call CscopeFind('i', expand('<cword>'))<CR>
+
+" tmux
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <C-H> :TmuxNavigateLeft<cr>
+nnoremap <silent> <C-J> :TmuxNavigateDown<cr>
+nnoremap <silent> <C-K> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -478,7 +512,7 @@ augroup reload_vimrc
     autocmd bufwritepost $MYVIMRC nested source $MYVIMRC
 augroup END
 
-" Turn persistent undo on 
+" Turn persistent undo on
 " means that you can undo even when you close a buffer/VIM
 try
     set undodir=~/.vim/temp_dirs/undodir
@@ -494,7 +528,7 @@ function! CmdLine(str)
     exe "menu Foo.Bar :" . a:str
     emenu Foo.Bar
     unmenu Foo
-endfunction 
+endfunction
 
 function! VisualSelection(direction, extra_filter) range
     let l:saved_reg = @"
@@ -557,7 +591,7 @@ func! DeleteTillSlash()
         else
             let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*/", "\\1", "")
         endif
-    endif   
+    endif
 
     return g:cmd_edited
 endfunc
@@ -565,6 +599,16 @@ endfunc
 func! CurrentFileDir(cmd)
     return a:cmd . " " . expand("%:p:h") . "/"
 endfunc
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Neovim Settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use Python 3.5.3 installed by pyenv
+let g:python3_host_prog = expand("~/.pyenv/versions/3.5.3/bin/python")
+
+" Use Python 2.7.13 installed by pyenv
+let g:python_host_prog = expand("~/.pyenv/versions/2.7.13/bin/python")
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
