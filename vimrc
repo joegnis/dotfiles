@@ -323,7 +323,7 @@ endif
 " Files and directories
 Plug 'jlanzarotta/bufexplorer'
 Plug 'ctrlpvim/ctrlp.vim'
-" Plug 'mru.vim'
+Plug 'vim-scripts/mru.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 " Coding
