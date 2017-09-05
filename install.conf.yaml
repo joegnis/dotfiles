@@ -9,15 +9,20 @@
 - link:
     ~/.dotfiles:
         path: ""
+    # Vim
     ~/.vimrc:
     ~/.vim/after:
         path: vim/after
     ~/.vim/UltiSnips:
         path: vim/UltiSnips
+    # NeoVim
     ~/.config/nvim/init.vim:
         path: neovim/init.vim
+    # Shells
     ~/.shell/aliases.sh:
         path: shell/aliases.sh
+    ~/.shell/shellrc_after:
+        path: shell/shellrc_after
     ~/.zshrc:
     ~/.zsh/antigenrc:
         path: zsh/antigenrc
@@ -27,9 +32,9 @@
     ~/.bash_profile:
     ~/.bash/bashitrc:
         path: bash/bashitrc
+    # Python
     ~/.config/flake8:
         path: config/flake8
+    # aria2
     ~/.config/aria2.conf:
         path: config/aria2.conf
-    ~/.shell/shellrc_after:
-        path: shell/shellrc_after
