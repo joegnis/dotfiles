@@ -29,3 +29,5 @@
         path: bash/bashitrc
     ~/.config/flake8:
         path: config/flake8
+    ~/.config/aria2.conf:
+        path: config/aria2.conf
