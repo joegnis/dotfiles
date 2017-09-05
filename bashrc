@@ -15,7 +15,12 @@ set -o vi
 # Default editor
 export EDITOR=vim
 
-# Allow local customizations for both zsh and bash 
+# Allow customizations for both zsh and bash
+if [ -f ~/.shell/shellrc_after ]; then
+    source ~/.shell/shellrc_after
+fi
+
+# Allow local customizations for both zsh and bash
 # in the ~/.shell/shellrc_local_after file
 if [ -f ~/.shell/shellrc_local_after ]; then
     source ~/.shell/shellrc_local_after
@@ -23,5 +28,5 @@ fi
 
 # Allow local customizations in the ~/.bashrc_local_after file
 if [ -f ~/.bashrc_local_after ]; then
-    source ~/.bashrc_local_after 
+    source ~/.bashrc_local_after
 fi

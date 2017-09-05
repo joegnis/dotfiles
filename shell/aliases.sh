@@ -1,15 +1,15 @@
-# Better which
-which () {
-    /usr/bin/which --read-alias --read-functions --show-title --show-dot --tty-only &>/dev/null
-    if [ "$?" -eq 2 ]; then
-        /usr/bin/which $@
-        return
-    fi
-    (alias; declare -f) | /usr/bin/which --tty-only --read-alias --read-functions --show-title --show-dot $@
-}
-
 # custome sudo
 alias mysudo='sudo -E env "PATH=$PATH"'
 
 # pretty print json
 alias prettyjson='python -m json.tool'
+
+# bd. See https://github.com/vigneshwaranr/bd
+alias bd=". bd -si"
+
+# pyenv
+alias workon='pyenv activate'
+alias mkvirtualenv='pyenv virtualenv'
+alias lsvirtualenv='pyenv virtualenvs'
+alias rmvirtualenv='pyenv uninstall'
+alias deactivate='pyenv deactivate'

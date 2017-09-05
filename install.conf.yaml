@@ -31,3 +31,5 @@
         path: config/flake8
     ~/.config/aria2.conf:
         path: config/aria2.conf
+    ~/.shell/shellrc_after:
+        path: shell/shellrc_after
