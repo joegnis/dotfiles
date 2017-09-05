@@ -27,3 +27,5 @@
     ~/.bash_profile:
     ~/.bash/bashitrc:
         path: bash/bashitrc
+    ~/.config/flake8:
+        path: config/flake8
