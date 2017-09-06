@@ -42,3 +42,5 @@
     ~/.tmux.conf:
     ~/.tmux/tmuxifier_layouts/default.session.sh:
         path: tmux/tmuxifier_layouts/default.session.sh
+    # git
+    ~/.gitconfig:

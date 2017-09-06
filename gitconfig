@@ -1,0 +1,23 @@
+[user]
+	email = joegnis@users.noreply.github.com
+	name = joegnis
+
+[alias]
+	st = status
+	unstage = reset HEAD --
+	last = log -1 HEAD
+	visual = !gitk
+	ci = commit
+    co = checkout
+    diffc = diff --cached
+
+[core]
+    editor = vim
+
+[merge]
+    conflictstyle = diff3
+
+[push]
+    default = upstream
+
+# vi: ft=gitconfig
