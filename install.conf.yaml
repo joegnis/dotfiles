@@ -38,3 +38,7 @@
     # aria2
     ~/.config/aria2.conf:
         path: config/aria2.conf
+    # tmux
+    ~/.tmux.conf:
+    ~/.tmux/tmuxifier_layouts/default.session.sh:
+        path: tmux/tmuxifier_layouts/default.session.sh
