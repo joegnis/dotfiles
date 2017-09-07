@@ -1,6 +1,11 @@
 # vi: set ft=sh :
 # Shared config between bash and zsh
 
+# Load secrets
+if [ -f ~/.shell/secrets ]; then
+    source ~/.shell/secrets
+fi
+
 export PATH=$PATH:$HOME/.local/bin
 
 # tmuxifier

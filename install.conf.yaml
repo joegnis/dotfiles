@@ -36,8 +36,8 @@
     ~/.config/flake8:
         path: config/flake8
     # aria2
-    ~/.config/aria2.conf:
-        path: config/aria2.conf
+    ~/.aria2/aria2.conf:
+        path: aria2/aria2.conf
     # tmux
     ~/.tmux.conf:
     ~/.tmux/tmuxifier_layouts/default.session.sh:
