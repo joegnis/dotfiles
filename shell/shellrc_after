@@ -4,6 +4,7 @@
 export PATH=$PATH:$HOME/.local/bin
 
 # tmuxifier
+export TMUXIFIER="$HOME/.tmux/tmuxifier"
 export PATH="$HOME/.tmux/tmuxifier/bin:$PATH"
 export TMUXIFIER_LAYOUT_PATH="$HOME/.tmux/tmuxifier_layouts"
 eval "$(tmuxifier init -)"
