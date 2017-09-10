@@ -18,7 +18,7 @@ export SCM_CHECK=true
 # after enabling or disabling aliases, plugins, and completions.
 export BASH_IT_AUTOMATIC_RELOAD_AFTER_CONFIG_CHANGE=1
 
-# Allow local customizations in ~/.zsh/antigenrc_local
+# Allow local customizations in ~/.bash/bashitrc_local
 if [ -f ~/.bash/bashitrc_local ]; then
     source ~/.bash/bashitrc_local
 fi
