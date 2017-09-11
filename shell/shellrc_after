@@ -25,4 +25,4 @@ eval "$(pyenv virtualenv-init -)"
 eval $(thefuck --alias)
 
 # solarized dircolors
-eval $(dircolors ~/.local/src/dircolors-solarized/dircolors.256dark)
+eval $(dircolors ~/.local/src/dircolors-solarized/dircolors.ansi-dark)
