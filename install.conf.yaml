@@ -44,3 +44,6 @@
         path: tmux/tmuxifier_layouts/default.session.sh
     # git
     ~/.gitconfig:
+
+- shell:
+    - [git submodule update --remote dotbot, Updating dotbot]
