@@ -369,6 +369,9 @@ Plug 'majutsushi/tagbar'
 " cscope
 Plug 'brookhong/cscope.vim'
 
+" Syntax highlighting
+Plug 'chr4/nginx.vim'
+
 " Line break
 set linebreak
 
