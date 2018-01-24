@@ -37,6 +37,9 @@ let g:mapleader = ","
 " Fast saving
 nmap <leader>w :w!<cr>
 
+" Make modeline work
+set modeline
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -371,6 +374,14 @@ Plug 'brookhong/cscope.vim'
 
 " Syntax highlighting
 Plug 'chr4/nginx.vim'
+Plug 'pearofducks/ansible-vim'
+
+" Session Management
+Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
+
+" Misc
+Plug 'junegunn/goyo.vim'  " distraction-free mode
+Plug 'SirVer/ultisnips' " snippet engine without snippets
 
 " Line break
 set linebreak
@@ -496,6 +507,17 @@ nnoremap <silent> <C-J> :TmuxNavigateDown<cr>
 nnoremap <silent> <C-K> :TmuxNavigateUp<cr>
 nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
 
+" ProSession
+let g:prosession_tmux_title = 1
+let g:prosession_on_startup = 0
+
+" UltiSnips
+let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
+let g:UltiSnipsExpandTrigger = '<c-j>'
+let g:UltiSnipsJumpForwardTrigger  = '<c-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
+let g:UltiSnipsListSnippets = '<c-l>'
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
@@ -609,8 +631,8 @@ endfunc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Neovim Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Use Python 3.5.3 installed by pyenv
-let g:python3_host_prog = expand("~/.pyenv/versions/3.5.3/bin/python")
+" Use Python 3.5.4 installed by pyenv
+let g:python3_host_prog = expand("~/.pyenv/versions/3.5.4/bin/python")
 
 " Use Python 2.7.13 installed by pyenv
 let g:python_host_prog = expand("~/.pyenv/versions/2.7.13/bin/python")
