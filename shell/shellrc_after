@@ -1,4 +1,3 @@
-# vi: set ft=sh :
 # Shared config between bash and zsh
 
 # Load secrets
@@ -12,14 +11,18 @@ export PATH=$PATH:$HOME/.local/bin
 export TMUXIFIER="$HOME/.tmux/tmuxifier"
 export PATH="$HOME/.tmux/tmuxifier/bin:$PATH"
 export TMUXIFIER_LAYOUT_PATH="$HOME/.tmux/tmuxifier_layouts"
-eval "$(tmuxifier init -)"
+command -v tmuxifier >/dev/null 2>&1 && eval "$(tmuxifier init -)"
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+if command -v pyenv >/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
 
 # thefuck
-eval "$(thefuck --alias)"
+command -v thefuck >/dev/null 2>&1 && eval "$(thefuck --alias)"
+
+# vim: ft=sh
