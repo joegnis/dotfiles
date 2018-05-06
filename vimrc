@@ -387,13 +387,20 @@ Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
 
 " Misc
 Plug 'junegunn/goyo.vim'  " distraction-free mode
-Plug 'SirVer/ultisnips' " snippet engine without snippets
+Plug 'SirVer/ultisnips', { 'on': [] } " snippet engine without snippets
 
 " Line break
 set linebreak
 
 " Initialize plugin system
 call plug#end()
+
+" Load some plugins the first time entering insert mode
+augroup load_after_insert
+  autocmd!
+  autocmd InsertEnter * call plug#load('ultisnips')
+            \| autocmd! load_after_insert
+augroup END
 
 " bufexplorer
 let g:bufExplorerShowRelativePath=1
