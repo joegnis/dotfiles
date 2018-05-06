@@ -3,7 +3,7 @@
 "    -> General
 "    -> VIM user interface
 "    -> Colors and Fonts
-"    -> Files and backups
+"    -> Files, backups and undo
 "    -> Text, tab and indent related
 "    -> Visual mode related
 "    -> Command mode related
@@ -287,7 +287,10 @@ exe "normal mz"
 %s/\s\+$//ge
 exe "normal `z"
 endfunc
-autocmd BufWrite * :call DeleteTrailingWS()
+augroup remove_trailing_whitespace
+    autocmd!
+    autocmd BufWrite * :call DeleteTrailingWS()
+augroup END
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -460,7 +463,10 @@ let g:syntastic_mode_map = {
 let python_highlight_all = 1
 
 " Omni complete functions
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
+augroup omnifunc
+    autocmd!
+    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
+augroup END
 
 " TagBar
 nmap <leader>t :TagbarToggle<CR>
@@ -482,7 +488,10 @@ let g:wordmotion_mappings = {
 
 " braceless
 " Turn on for indented languages
-autocmd FileType python,coffee BracelessEnable +indent +highlight-cc
+augroup enable_braceless_ft
+    autocmd!
+    autocmd FileType python,coffee BracelessEnable +indent +highlight-cc
+augroup END
 let g:braceless_block_key = 'i'
 
 " Cscope settings
@@ -538,11 +547,12 @@ map <leader>q :e ~/buffer<cr>
 map <leader>pp :setlocal paste!<cr>
 
 " Fast editing and reloading of vimrc configs
-map <leader>e :e! $MYVIMRC<cr>
-"autocmd! bufwritepost $MYVIMRC source $MYVIMRC
+let myvimrc = expand("~/.vimrc")
+map <leader>e :e! ~/.vimrc<cr>
 augroup reload_vimrc
     autocmd!
-    autocmd bufwritepost $MYVIMRC nested source $MYVIMRC
+    " 'nested' makes the reloading look normal...dk why
+    autocmd BufWritePost ~/.vimrc* nested source ~/.vimrc
 augroup END
 
 " Turn persistent undo on
@@ -666,10 +676,10 @@ endfunc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Neovim Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Use Python 3.5.4 installed by pyenv
-let g:python3_host_prog = expand("~/.pyenv/versions/3.5.4/bin/python")
+" Use Python 3 installed by pyenv
+let g:python3_host_prog = expand("~/.pyenv/versions/3.6.5/bin/python")
 
-" Use Python 2.7.13 installed by pyenv
+" Use Python 2 installed by pyenv
 let g:python_host_prog = expand("~/.pyenv/versions/2.7.13/bin/python")
 
 
