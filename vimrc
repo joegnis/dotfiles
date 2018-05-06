@@ -389,9 +389,6 @@ Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
 Plug 'junegunn/goyo.vim'  " distraction-free mode
 Plug 'SirVer/ultisnips', { 'on': [] } " snippet engine without snippets
 
-" Line break
-set linebreak
-
 " Initialize plugin system
 call plug#end()
 
