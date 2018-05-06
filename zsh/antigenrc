@@ -14,6 +14,9 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 # Useful function to quickly add virtualenv prompt in themes
 antigen bundle tonyseek/oh-my-zsh-virtualenv-prompt
 
+# Quickly go back to a specific parent directory
+antigen bundle Tarrasch/zsh-bd
+
 # Load the theme.
 antigen theme ys
 
