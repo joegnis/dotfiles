@@ -12,6 +12,7 @@
 "    -> Editing mappings
 "    -> Spell checking
 "    -> Plugins
+"    -> Color scheme
 "    -> Misc
 "    -> Helper functions
 "    -> Neovim settings
@@ -347,7 +348,8 @@ Plug 'sgur/vim-textobj-parameter'
 " Color schemes
 Plug 'fugalh/desert.vim'
 Plug 'rhysd/vim-color-spring-night'
-Plug 'altercation/vim-colors-solarized'
+Plug 'joshdick/onedark.vim'
+Plug 'lifepillar/vim-solarized8'
 
 " Git
 Plug 'airblade/vim-gitgutter'
@@ -375,6 +377,7 @@ Plug 'brookhong/cscope.vim'
 " Syntax highlighting
 Plug 'chr4/nginx.vim'
 Plug 'pearofducks/ansible-vim'
+Plug 'vim-scripts/scons.vim'
 
 " Session Management
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
@@ -461,12 +464,6 @@ autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
 
 " TagBar
 nmap <leader>t :TagbarToggle<CR>
-
-" Choose a color scheme
-" To list available color schemes, type :colo<C-d>
-set bg=dark
-silent! colorscheme solarized
-let g:solarized_contrast="high"
 
 " vim-sandwich
 " Disable s, use cl instead
@@ -555,6 +552,35 @@ try
     set undofile
 catch
 endtry
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Color Scheme
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+if (has("nvim"))
+    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+"For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+"Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+" < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+if (has("termguicolors"))
+    set termguicolors
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+
+" To list available color schemes, type :colorscheme <Tab>
+" Color scheme should be put after plugins and the setting above.
+" To change Vim's colorscheme, it'd be better to
+" * Change Vim's colorscheme here
+" * Change the terminal's colorscheme to the same one
+" * Change lightline's colorscheme to the same one
+"set background=dark
+"colorscheme solarized8
+colorscheme onedark
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

@@ -25,4 +25,10 @@ fi
 # thefuck
 command -v thefuck >/dev/null 2>&1 && eval "$(thefuck --alias)"
 
+# autojump
+# Debian
+if [ -f /usr/share/autojump/autojump.sh ]; then
+    source /usr/share/autojump/autojump.sh
+fi
+
 # vim: ft=sh
