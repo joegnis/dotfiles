@@ -12,7 +12,7 @@
     diffc = diff --cached
 
 [core]
-    editor = nvim
+    editor = vim
 
 [merge]
     conflictstyle = diff3

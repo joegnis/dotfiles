@@ -21,6 +21,8 @@
     ~/.config/nvim/init.vim:
         path: neovim/init.vim
     # Shells
+    ~/.shell/shellrc_before:
+        path: shell/shellrc_before
     ~/.shell/aliases.sh:
         path: shell/aliases.sh
     ~/.shell/shellrc_after:

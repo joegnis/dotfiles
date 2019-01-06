@@ -1,34 +1,94 @@
-# Shared config between bash and zsh
+# Shared config among shells (loaded after other config but before local config at the end)
 
 # Load secrets
 if [ -f ~/.shell/secrets ]; then
     source ~/.shell/secrets
 fi
 
+# Add local bin dir to path
 export PATH=$PATH:$HOME/.local/bin
 
+# Enable Bash completion
+if [ $platform = "linux" ]; then
+    if [ -f /usr/share/bash-completion/bash_completion ]; then
+        . /usr/share/bash-completion/bash_completion
+    elif [ -f /etc/bash_completion ]; then
+        . /etc/bash_completion
+    fi
+elif [ $platform = "macos" ]; then
+    if [ -f /usr/local/etc/bash_completion ]; then
+        . /usr/local/etc/bash_completion
+    fi
+fi
+
+# make less more friendly for non-text input files, see lesspipe(1)
+if command_exists lesspipe.sh; then
+    if [ $platform = "macos" ]; then
+        export LESSOPEN="|/usr/local/bin/lesspipe.sh %s" LESS_ADVANCED_PREPROCESSOR=1
+    elif [ $platform = "linux" ]; then
+        eval "$(SHELL=/bin/sh lesspipe)"
+    fi
+fi
+
+# Enable color support of ls and also add handy aliases
+if [ $platform = "linux" ]; then
+    if [ -x /usr/bin/dircolors ]; then
+        test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+        alias ls='ls --color=auto'
+        alias dir='dir --color=auto'
+        alias vdir='vdir --color=auto'
+
+        alias grep='grep --color=auto'    alias fgrep='fgrep --color=auto'
+        alias egrep='egrep --color=auto'
+    fi
+elif [ $platform = "macos" ]; then
+    export CLICOLOR=1
+    # hard-coded, search for LSCOLORS online for more
+    export LSCOLORS="Gxfxcxdxbxegedabagacad"
+fi
+
+# Some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
 # tmuxifier
-export TMUXIFIER="$HOME/.tmux/tmuxifier"
-export PATH="$HOME/.tmux/tmuxifier/bin:$PATH"
-export TMUXIFIER_LAYOUT_PATH="$HOME/.tmux/tmuxifier_layouts"
-command -v tmuxifier >/dev/null 2>&1 && eval "$(tmuxifier init -)"
+if command_exists tmuxifier; then
+    export TMUXIFIER="$HOME/.tmux/tmuxifier"
+    export PATH="$HOME/.tmux/tmuxifier/bin:$PATH"
+    export TMUXIFIER_LAYOUT_PATH="$HOME/.tmux/tmuxifier_layouts"
+    eval "$(tmuxifier init -)"
+fi
 
 # pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-
-if command -v pyenv >/dev/null 2>&1; then
+if command_exists pyenv; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
+    alias workon='pyenv activate'
+    alias mkvirtualenv='pyenv virtualenv'
+    alias lsvirtualenv='pyenv virtualenvs'
+    alias rmvirtualenv='pyenv uninstall'
+    alias deactivate='pyenv deactivate'
+fi
+
+# bd. See https://github.com/vigneshwaranr/bd
+# Quickly go back to a parent directory in linux instead of typing "cd ../../.." repeatedly
+if command_exists bd; then
+    alias bd=". bd -si"
 fi
 
 # thefuck
-command -v thefuck >/dev/null 2>&1 && eval "$(thefuck --alias)"
+if command_exists thefuck; then
+    eval "$(thefuck --alias)"
+fi
 
 # autojump
-# Debian
-if [ -f /usr/share/autojump/autojump.sh ]; then
-    source /usr/share/autojump/autojump.sh
+if [ $platform = "linux" ]; then
+    [ -f /usr/share/autojump/autojump.sh ] && source /usr/share/autojump/autojump.sh
+elif [ $platform = "macos" ]; then
+    [ -f /usr/local/etc/profile.d/autojump.sh ] && source /usr/local/etc/profile.d/autojump.sh
 fi
 
 # vim: ft=sh

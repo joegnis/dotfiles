@@ -197,6 +197,10 @@ set si "Smart indent
 set wrap "Wrap lines
 
 " Access to system clipboard
+if !has("clipboard")
+    echoerr "clipboard option not installed in current Vim,
+            \ thus no access to system clipboard"
+endif
 noremap <leader>y "+y
 noremap <leader>yy "+Y
 noremap <leader>p :set paste<CR>"+gP:set nopaste<CR>
@@ -316,6 +320,14 @@ if exists('py2') && has('python')
 elseif has('python3')
 endif
 
+" Automatic installation of vim-plug
+" See https://github.com/junegunn/vim-plug/wiki/tips
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 " Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
 call plug#begin('~/.vim/plugged')
 
@@ -373,9 +385,6 @@ Plug 'embear/vim-localvimrc'
 
 " ctag
 Plug 'majutsushi/tagbar'
-
-" cscope
-Plug 'brookhong/cscope.vim'
 
 " Syntax highlighting
 Plug 'chr4/nginx.vim'
@@ -497,26 +506,6 @@ augroup enable_braceless_ft
     autocmd FileType python,coffee BracelessEnable +indent +highlight-cc
 augroup END
 let g:braceless_block_key = 'i'
-
-" Cscope settings
-nnoremap <C-\>a :call CscopeFindInteractive(expand('<cword>'))<CR>
-nnoremap <C-\>l :call ToggleLocationList()<CR>
-" s: Find this C symbol
-nnoremap  <C-\>s :call CscopeFind('s', expand('<cword>'))<CR>
-" g: Find this definition
-nnoremap  <C-\>g :call CscopeFind('g', expand('<cword>'))<CR>
-" d: Find functions called by this function
-nnoremap  <C-\>d :call CscopeFind('d', expand('<cword>'))<CR>
-" c: Find functions calling this function
-nnoremap  <C-\>c :call CscopeFind('c', expand('<cword>'))<CR>
-" t: Find this text string
-nnoremap  <C-\>t :call CscopeFind('t', expand('<cword>'))<CR>
-" e: Find this egrep pattern
-nnoremap  <C-\>e :call CscopeFind('e', expand('<cword>'))<CR>
-" f: Find this file
-nnoremap  <C-\>f :call CscopeFind('f', expand('<cword>'))<CR>
-" i: Find files #including this file
-nnoremap  <C-\>i :call CscopeFind('i', expand('<cword>'))<CR>
 
 " tmux
 let g:tmux_navigator_no_mappings = 1
@@ -681,10 +670,10 @@ endfunc
 " => Neovim Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use Python 3 installed by pyenv
-let g:python3_host_prog = expand("~/.pyenv/versions/3.6.5/bin/python")
+let g:python3_host_prog = expand("~/.pyenv/versions/3.7.1/bin/python")
 
 " Use Python 2 installed by pyenv
-let g:python_host_prog = expand("~/.pyenv/versions/2.7.13/bin/python")
+let g:python_host_prog = expand("~/.pyenv/versions/2.7.15/bin/python")
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

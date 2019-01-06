@@ -1,3 +1,8 @@
+# Load shared config among shells
+if [ -f ~/.shell/shellrc_before ]; then
+    source ~/.shell/shellrc_before
+fi
+
 # Allow local customizations in the ~/.zshrc_local_before file
 if [ -f ~/.zshrc_local_before ]; then
     source ~/.zshrc_local_before
@@ -16,12 +21,6 @@ set -o vi
 
 # Default editor
 export EDITOR=vim
-
-# enable color support, aliases are handled by zsh plugin
-# See: https://github.com/seebi/dircolors-solarized
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors ~/.dircolors)"
-fi
 
 # Allow customizations for both zsh and bash
 if [ -f ~/.shell/shellrc_after ]; then
