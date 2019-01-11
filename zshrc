@@ -10,7 +10,12 @@ fi
 
 # Init plugin manager Antigen
 export ADOTDIR=~/.zsh/antigen
-source $ADOTDIR/src/antigen.zsh
+antigen_source_dir="$ADOTDIR"/src
+if [ ! -d "$antigen_source_dir" ]; then
+    mkdir -p "$antigen_source_dir"
+    curl -L git.io/antigen > "$antigen_source_dir"/antigen.zsh
+fi
+source $antigen_source_dir/antigen.zsh
 antigen init ~/.zsh/antigenrc
 
 # Aliases

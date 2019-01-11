@@ -8,20 +8,7 @@ fi
 # Add local bin dir to path
 export PATH=$PATH:$HOME/.local/bin
 
-# Enable Bash completion
-if [ $platform = "linux" ]; then
-    if [ -f /usr/share/bash-completion/bash_completion ]; then
-        . /usr/share/bash-completion/bash_completion
-    elif [ -f /etc/bash_completion ]; then
-        . /etc/bash_completion
-    fi
-elif [ $platform = "macos" ]; then
-    if [ -f /usr/local/etc/bash_completion ]; then
-        . /usr/local/etc/bash_completion
-    fi
-fi
-
-# make less more friendly for non-text input files, see lesspipe(1)
+# make `less` more friendly for non-text input files, see lesspipe(1)
 if command_exists lesspipe.sh; then
     if [ $platform = "macos" ]; then
         export LESSOPEN="|/usr/local/bin/lesspipe.sh %s" LESS_ADVANCED_PREPROCESSOR=1

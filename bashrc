@@ -61,6 +61,19 @@ if [ $interactive = "yes" ]; then
     #shopt -s globstar
 fi
 
+# Enable Bash completion
+if [ $platform = "linux" ]; then
+    if [ -f /usr/share/bash-completion/bash_completion ]; then
+        . /usr/share/bash-completion/bash_completion
+    elif [ -f /etc/bash_completion ]; then
+        . /etc/bash_completion
+    fi
+elif [ $platform = "macos" ]; then
+    if [ -f /usr/local/etc/bash_completion ]; then
+        . /usr/local/etc/bash_completion
+    fi
+fi
+
 # Allow customizations for both zsh and bash
 if [ -f ~/.shell/shellrc_after ]; then
     source ~/.shell/shellrc_after
