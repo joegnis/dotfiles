@@ -48,6 +48,9 @@
         path: tmux/tmuxifier_layouts/default.session.sh
     # git
     ~/.gitconfig:
+    # most
+    ~/.mostrc:
+        path: most.rc
 
 - shell:
     - [git submodule update --remote dotbot, Updating dotbot]
