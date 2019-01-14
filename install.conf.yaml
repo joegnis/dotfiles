@@ -11,6 +11,7 @@
         path: ""
     # Vim
     ~/.vimrc:
+        path: vim/vimrc
     ~/.vim/after:
         path: vim/after
     ~/.vim/UltiSnips:
@@ -28,12 +29,15 @@
     ~/.shell/shellrc_after:
         path: shell/shellrc_after
     ~/.zshrc:
+        path: zsh/zshrc
     ~/.zsh/antigenrc:
         path: zsh/antigenrc
     ~/.zsh/themes:
         path: zsh/themes
     ~/.bashrc:
+        path: bash/bashrc
     ~/.bash_profile:
+        path: bash/bash_profile
     ~/.bash/bashitrc:
         path: bash/bashitrc
     # Python
@@ -44,6 +48,7 @@
         path: aria2/aria2.conf
     # tmux
     ~/.tmux.conf:
+        path: tmux/tmux.conf
     ~/.tmux/tmuxifier_layouts/default.session.sh:
         path: tmux/tmuxifier_layouts/default.session.sh
     # git
