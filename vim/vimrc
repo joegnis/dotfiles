@@ -122,6 +122,9 @@ set path+=**
 " Display all matching files when we tab complete
 set wildmenu
 
+" Set 3 reference columns for line length
+set colorcolumn=72,79,100
+highlight ColorColumn ctermbg=darkgray
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
