@@ -355,7 +355,7 @@ Plug 'vim-python/python-syntax'
 
 " Text objects
 Plug 'kana/vim-textobj-user' " Dependency
-Plug 'machakann/vim-sandwich'
+"Plug 'machakann/vim-sandwich'
 Plug 'chaoren/vim-wordmotion' " change the definition of a 'word' when moving in vim
 Plug 'tweekmonster/braceless.vim' " For languages that use indentation
 Plug 'sgur/vim-textobj-parameter'
@@ -393,6 +393,10 @@ Plug 'vim-scripts/scons.vim'
 
 " Session Management
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
+
+" General
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 
 " Misc
 Plug 'junegunn/goyo.vim'  " distraction-free mode
@@ -477,11 +481,6 @@ augroup END
 
 " TagBar
 nmap <leader>t :TagbarToggle<CR>
-
-" vim-sandwich
-" Disable s, use cl instead
-nmap s <Nop>
-xmap s <Nop>
 
 " wordmotion
 let g:wordmotion_mappings = {
