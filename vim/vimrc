@@ -388,6 +388,7 @@ Plug 'mhinz/vim-startify'
 Plug 'embear/vim-localvimrc'
 
 " ctag
+Plug 'xolox/vim-misc' | Plug 'xolox/vim-easytags'
 Plug 'majutsushi/tagbar'
 
 " Syntax highlighting
@@ -482,6 +483,13 @@ augroup omnifunc
     autocmd!
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
 augroup END
+
+" easytags
+let g:easytags_by_filetype = $HOME . '/.cache/vim-easytags'
+if empty(glob(g:easytags_by_filetype))
+    call mkdir(g:easytags_by_filetype, "p")
+endif
+let g:easytags_always_enabled = 1
 
 " TagBar
 nmap <leader>t :TagbarToggle<CR>
