@@ -350,6 +350,15 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Coding
+" Deoplete
+"" Requires Python3 support
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 Plug 'scrooloose/syntastic'
 Plug 'othree/csscomplete.vim'
 
@@ -388,7 +397,6 @@ Plug 'mhinz/vim-startify'
 Plug 'embear/vim-localvimrc'
 
 " ctag
-Plug 'xolox/vim-misc' | Plug 'xolox/vim-easytags'
 Plug 'majutsushi/tagbar'
 
 " Syntax highlighting
@@ -484,12 +492,8 @@ augroup omnifunc
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
 augroup END
 
-" easytags
-let g:easytags_by_filetype = $HOME . '/.cache/vim-easytags'
-if empty(glob(g:easytags_by_filetype))
-    call mkdir(g:easytags_by_filetype, "p")
-endif
-let g:easytags_always_enabled = 1
+" deoplete
+let g:deoplete#enable_at_startup = 1
 
 " TagBar
 nmap <leader>t :TagbarToggle<CR>
