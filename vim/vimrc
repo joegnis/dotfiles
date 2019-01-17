@@ -367,6 +367,11 @@ Plug 'Shougo/neco-vim'
 " Asynchronous Lint Engine
 Plug 'w0rp/ale'
 
+" Semantic syntax hightlighting for Clang
+if has('nvim')
+    Plug 'arakashic/chromatica.nvim'
+endif
+
 " CSS
 Plug 'othree/csscomplete.vim'
 
@@ -504,10 +509,17 @@ if has('nvim')
     nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 endif
 
+" Chromatica
+if has('nvim')
+    let g:chromatica#libclang_path='/usr/local/opt/llvm/lib'
+    let g:chromatica#enable_at_startup=1
+    let g:chromatica#responsive_mode=1
+endif
+
 " python-syntax
 let python_highlight_all = 1
 
-" Omni complete functions
+" CSS complete
 augroup omnifunc
     autocmd!
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
