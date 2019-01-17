@@ -319,16 +319,18 @@ map <leader>s? z=
 " Vim on Fedora dynamically load Python libraries, this snippet does the trick
 " to activate python3 by default. Start Vim with `vim --cmd 'let py2=1'` to
 " use python2.
-if exists('py2') && has('python')
-elseif has('python3')
+if !has('nvim')
+    if exists('py2') && has('python')
+    elseif has('python3')
+    endif
 endif
 
 " Automatic installation of vim-plug
 " See https://github.com/junegunn/vim-plug/wiki/tips
 if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 " Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
@@ -361,6 +363,17 @@ else
 endif
 Plug 'scrooloose/syntastic'
 Plug 'othree/csscomplete.vim'
+
+" C++
+if has('nvim')
+    " Requires deoplete and rtags
+    " How to use:
+    " - Create compilation database:
+    "   'cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON your/project/root'
+    " - Run rtags server (can let system auto-start it)
+    " - Run 'rc -J your/build/directory'
+    Plug 'rzaluska/deoplete-rtags'
+endif
 
 " Python
 Plug 'davidhalter/jedi-vim' | Plug 'lambdalisue/vim-pyenv' " Python
