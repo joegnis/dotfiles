@@ -351,8 +351,7 @@ Plug 'vim-scripts/mru.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
-" Coding
-" Deoplete
+" Deoplete, auto-complete
 "" Requires Python3 support
 if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -364,7 +363,11 @@ else
 endif
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/neco-vim'
-Plug 'scrooloose/syntastic'
+
+" Asynchronous Lint Engine
+Plug 'w0rp/ale'
+
+" CSS
 Plug 'othree/csscomplete.vim'
 
 " Language Client
@@ -500,20 +503,6 @@ if has('nvim')
     nnoremap <silent> gs :call LanguageClient#textDocument_documentSymbol()<CR>
     nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 endif
-
-" Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_mode_map = {
-    \ "mode": "active",
-    \ "active_filetypes": [],
-    \ "passive_filetypes": ["vim"] }
 
 " python-syntax
 let python_highlight_all = 1
