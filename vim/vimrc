@@ -475,7 +475,6 @@ map <leader>nb :NERDTreeFromBookmark
 map <leader>nf :NERDTreeFind<cr>
 
 " Git gutter
-let g:gitgutter_enabled=0
 nnoremap <silent> <leader>gg :GitGutterToggle<cr>
 
 " Goyo
