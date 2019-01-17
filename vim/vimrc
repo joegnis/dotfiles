@@ -535,6 +535,16 @@ let g:UltiSnipsJumpForwardTrigger  = '<c-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
 let g:UltiSnipsListSnippets = '<c-l>'
 
+" Startify
+let startify_dir = expand('~/.vim/files/info')
+if !isdirectory(startify_dir)
+    call mkdir(startify_dir, 'p')
+endif
+if has('nvim')
+    set viminfo='100,n$HOME/.vim/files/info/nviminfo
+else
+    set viminfo='100,n$HOME/.vim/files/info/viminfo
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
