@@ -355,24 +355,24 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 " Deoplete
 "" Requires Python3 support
 if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
+    " Does not install for vim
+    " Plug 'Shougo/deoplete.nvim'
+    " Plug 'roxma/nvim-yarp'
+    " Plug 'roxma/vim-hug-neovim-rpc'
 endif
+Plug 'Shougo/neco-syntax'
+Plug 'Shougo/neco-vim'
 Plug 'scrooloose/syntastic'
 Plug 'othree/csscomplete.vim'
 
-" C++
+" Language Client
 if has('nvim')
-    " Requires deoplete and rtags
-    " How to use:
-    " - Create compilation database:
-    "   'cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON your/project/root'
-    " - Run rtags server (can let system auto-start it)
-    " - Run 'rc -J your/build/directory'
-    Plug 'rzaluska/deoplete-rtags'
+    Plug 'autozimu/LanguageClient-neovim', {
+        \ 'branch': 'next',
+        \ 'do': 'bash install.sh',
+        \ }
 endif
 
 " Python
@@ -481,6 +481,25 @@ nnoremap <silent> <leader>z :Goyo<cr>
 
 " vim-pyenv
 " Moved to after/ftplugin/python.vim
+
+" Clang language server cquery
+if has('nvim')
+    let g:LanguageClient_serverCommands = {
+        \ 'cpp': ['cquery', '--log-file=/tmp/cq.log'],
+        \ 'c': ['cquery', '--log-file=/tmp/cq.log'],
+        \ }
+
+    let g:LanguageClient_loadSettings = 1 " Use an absolute configuration path if you want system-wide settings
+    let g:LanguageClient_settingsPath = expand('~/.config/nvim/cquery-settings.json')
+    set completefunc=LanguageClient#complete
+    set formatexpr=LanguageClient_textDocument_rangeFormatting()
+
+    nnoremap <silent> gh :call LanguageClient#textDocument_hover()<CR>
+    nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+    nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
+    nnoremap <silent> gs :call LanguageClient#textDocument_documentSymbol()<CR>
+    nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+endif
 
 " Syntastic
 set statusline+=%#warningmsg#
