@@ -290,9 +290,9 @@ map 0 ^
 
 " Delete trailing white space on save, useful for Python and CoffeeScript
 func! DeleteTrailingWS()
-exe "normal mz"
-%s/\s\+$//ge
-exe "normal `z"
+    exe "normal mz"
+    %s/\s\+$//ge
+    exe "normal `z"
 endfunc
 augroup remove_trailing_whitespace
     autocmd!
@@ -364,13 +364,16 @@ endif
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/neco-vim'
 
-" Asynchronous Lint Engine
+" Asynchronous linting
 Plug 'w0rp/ale'
 
 " Semantic syntax hightlighting for Clang
 if has('nvim')
     Plug 'arakashic/chromatica.nvim'
 endif
+
+" Formatting Clang code
+Plug 'rhysd/vim-clang-format'
 
 " CSS
 Plug 'othree/csscomplete.vim'
@@ -515,6 +518,10 @@ if has('nvim')
     let g:chromatica#responsive_mode=1
 endif
 
+" Async linting
+let g:ale_linters = {'cpp': ['cquery']}
+let g:ale_fixers = {'cpp': ['clang-format']}
+
 " python-syntax
 let python_highlight_all = 1
 
@@ -532,12 +539,12 @@ nmap <leader>t :TagbarToggle<CR>
 
 " wordmotion
 let g:wordmotion_mappings = {
-\ 'w' : 'w',
-\ 'b' : 'b',
-\ 'e' : 'e',
-\ 'ge' : 'ge',
-\ 'aw' : 'aw',
-\ 'iw' : 'iw'
+\ 'w' : '<M-w>',
+\ 'b' : '<M-b>',
+\ 'e' : '<M-e>',
+\ 'ge' : 'g<M-e>',
+\ 'aw' : 'a<M-w>',
+\ 'iw' : 'i<M-w>'
 \ }
 
 " braceless
