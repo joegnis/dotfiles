@@ -27,6 +27,9 @@ set -o vi
 # Default editor
 export EDITOR=vim
 
+# iTerm 2
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
 # Allow customizations for both zsh and bash
 if [ -f ~/.shell/shellrc_after ]; then
     source ~/.shell/shellrc_after
@@ -42,3 +45,4 @@ fi
 if [ -f ~/.zshrc_local_after ]; then
     source ~/.zshrc_local_after
 fi
+
