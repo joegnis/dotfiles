@@ -78,4 +78,7 @@ elif [ $platform = "macos" ]; then
     [ -f /usr/local/etc/profile.d/autojump.sh ] && source /usr/local/etc/profile.d/autojump.sh
 fi
 
+# gitignore.io
+gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
+
 # vim: ft=sh
