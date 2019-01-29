@@ -12,8 +12,8 @@
     # Vim
     ~/.vimrc:
         path: vim/vimrc
-    ~/.vim/after:
-        path: vim/after
+    ~/.vim/ftplugin:
+        path: vim/ftplugin
     ~/.vim/UltiSnips:
         path: vim/UltiSnips
     ~/.vim/ftdetect:
