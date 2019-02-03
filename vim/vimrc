@@ -126,6 +126,9 @@ set wildmenu
 set colorcolumn=72,79,100
 highlight ColorColumn ctermbg=darkgray
 
+" Update time (so that, e.g. GitGutter can update faster)
+set updatetime=100
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
