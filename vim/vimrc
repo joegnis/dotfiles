@@ -205,7 +205,7 @@ set wrap "Wrap lines
 " Access to system clipboard
 if !has("clipboard")
     echoerr "clipboard option not installed in current Vim,
-            \ thus no access to system clipboard"
+                \ thus no access to system clipboard"
 endif
 noremap <leader>y "+y
 noremap <leader>yy "+Y
@@ -266,8 +266,8 @@ map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Specify the behavior when switching between buffers
 try
-set switchbuf=useopen,usetab,newtab
-set stal=2
+    set switchbuf=useopen,usetab,newtab
+    set stal=2
 catch
 endtry
 
@@ -290,17 +290,6 @@ set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remap VIM 0 to first non-blank character
 map 0 ^
-
-" Delete trailing white space on save, useful for Python and CoffeeScript
-func! DeleteTrailingWS()
-    exe "normal mz"
-    %s/\s\+$//ge
-    exe "normal `z"
-endfunc
-augroup remove_trailing_whitespace
-    autocmd!
-    autocmd BufWrite * :call DeleteTrailingWS()
-augroup END
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -332,7 +321,7 @@ endif
 " See https://github.com/junegunn/vim-plug/wiki/tips
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
@@ -346,6 +335,9 @@ let $LOCAL_PLUGIN_FILE = expand('~/.vimrc_local_plugins')
 if filereadable($LOCAL_PLUGIN_FILE)
     source $LOCAL_PLUGIN_FILE
 endif
+
+" Local vimrc
+Plug 'embear/vim-localvimrc'
 
 " Files and directories
 Plug 'jlanzarotta/bufexplorer'
@@ -378,15 +370,18 @@ endif
 " Formatting Clang code
 Plug 'rhysd/vim-clang-format'
 
+" Autoformatter (for every file type)
+Plug 'Chiel92/vim-autoformat'
+
 " CSS
 Plug 'othree/csscomplete.vim'
 
 " Language Client
 if has('nvim')
     Plug 'autozimu/LanguageClient-neovim', {
-        \ 'branch': 'next',
-        \ 'do': 'bash install.sh',
-        \ }
+                \ 'branch': 'next',
+                \ 'do': 'bash install.sh',
+                \ }
 endif
 
 " Python
@@ -447,9 +442,9 @@ call plug#end()
 
 " Load some plugins the first time entering insert mode
 augroup load_after_insert
-  autocmd!
-  autocmd InsertEnter * call plug#load('ultisnips')
-            \| autocmd! load_after_insert
+    autocmd!
+    autocmd InsertEnter * call plug#load('ultisnips')
+                \| autocmd! load_after_insert
 augroup END
 
 " bufexplorer
@@ -498,12 +493,15 @@ nnoremap <silent> <leader>z :Goyo<cr>
 " Clang language server cquery
 if has('nvim')
     let g:LanguageClient_serverCommands = {
-        \ 'cpp': ['cquery', '--log-file=/tmp/cq.log'],
-        \ 'c': ['cquery', '--log-file=/tmp/cq.log'],
-        \ }
+                \ 'c': ['ccls', '--log-file=/tmp/cc.log'],
+                \ 'cpp': ['ccls', '--log-file=/tmp/cc.log'],
+                \ 'cuda': ['ccls', '--log-file=/tmp/cc.log'],
+                \ 'objc': ['ccls', '--log-file=/tmp/cc.log'],
+                \ }
 
     let g:LanguageClient_loadSettings = 1 " Use an absolute configuration path if you want system-wide settings
-    let g:LanguageClient_settingsPath = expand('~/.config/nvim/cquery-settings.json')
+    let g:LanguageClient_settingsPath = expand('~/.config/nvim/ccls-settings.json')
+    let g:LanguageClient_hasSnippetSupport = 0
     set completefunc=LanguageClient#complete
     set formatexpr=LanguageClient_textDocument_rangeFormatting()
 
@@ -514,15 +512,41 @@ if has('nvim')
     nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 endif
 
+" Clang-format
+let g:clang_format#auto_format = 1
+
+"" autoformat
+"" This plugin defaults to autoindent, retab, and remove trailing spaces
+"" when no formatter is available
+let g:autoformat_autoindent = 0
+autocmd BufWrite * :Autoformat
+" Download this formatter from https://github.com/ds26gte/scmindent
+" and put it in PATH
+let g:formatdef_scmindent = '"scmindent.rkt"'
+" scmindent formats comment, need to be addressed
+"let g:formatters_lisp = ['scmindent']
+"let g:formatters_scheme = ['scmindent']
+"let g:formatters_racket = ['scmindent']
+" Disable for some types as they are handled by Clang-format
+let g:formatters_cpp = []
+let g:formatters_c = []
+let g:formatters_objc = []
+" CMake
+"let g:formatdef_cmakeformat = '"cmake-format -"'
+"let g:formatters_cmake = ['cmakeformat']
+" Python
+let g:formatters_python = ['yapf']
+
 " Chromatica
 if has('nvim')
     let g:chromatica#libclang_path='/usr/local/opt/llvm/lib'
     let g:chromatica#enable_at_startup=1
     let g:chromatica#responsive_mode=1
+    let g:chromatica#search_source_args=1
 endif
 
 " Async linting
-let g:ale_linters = {'cpp': ['cquery']}
+let g:ale_linters = {'cpp': ['ccls']}
 let g:ale_fixers = {'cpp': ['clang-format']}
 
 " python-syntax
@@ -542,13 +566,13 @@ nmap <leader>t :TagbarToggle<CR>
 
 " wordmotion
 let g:wordmotion_mappings = {
-\ 'w' : '<M-w>',
-\ 'b' : '<M-b>',
-\ 'e' : '<M-e>',
-\ 'ge' : 'g<M-e>',
-\ 'aw' : 'a<M-w>',
-\ 'iw' : 'i<M-w>'
-\ }
+            \ 'w' : '<M-w>',
+            \ 'b' : '<M-b>',
+            \ 'e' : '<M-e>',
+            \ 'ge' : 'g<M-e>',
+            \ 'aw' : 'a<M-w>',
+            \ 'iw' : 'i<M-w>'
+            \ }
 
 " braceless
 " Turn on for indented languages
@@ -588,6 +612,7 @@ else
     set viminfo='100,n$HOME/.vim/files/info/viminfo
 endif
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -616,6 +641,13 @@ try
     set undofile
 catch
 endtry
+
+function! TrimEndLines()
+    let save_cursor = getpos(".")
+    :silent! %s#\($\n\s*\)\+\%$##
+    call setpos('.', save_cursor)
+endfunction
+au BufWritePre * call TrimEndLines()
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -684,22 +716,22 @@ endfunction
 " Don't close window, when deleting a buffer
 command! Bclose call <SID>BufcloseCloseIt()
 function! <SID>BufcloseCloseIt()
-   let l:currentBufNum = bufnr("%")
-   let l:alternateBufNum = bufnr("#")
+    let l:currentBufNum = bufnr("%")
+    let l:alternateBufNum = bufnr("#")
 
-   if buflisted(l:alternateBufNum)
-     buffer #
-   else
-     bnext
-   endif
+    if buflisted(l:alternateBufNum)
+        buffer #
+    else
+        bnext
+    endif
 
-   if bufnr("%") == l:currentBufNum
-     new
-   endif
+    if bufnr("%") == l:currentBufNum
+        new
+    endif
 
-   if buflisted(l:currentBufNum)
-     execute("bdelete! ".l:currentBufNum)
-   endif
+    if buflisted(l:currentBufNum)
+        execute("bdelete! ".l:currentBufNum)
+    endif
 endfunction
 
 func! DeleteTillSlash()
