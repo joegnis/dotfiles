@@ -58,6 +58,12 @@
     # most
     ~/.mostrc:
         path: most.rc
+    # cmake-format
+    ~/.cmake-format.py:
+        path: cmake-format.py
+    # clang-format
+    ~/.clang-format:
+        path: clang-format
 
 - shell:
     - [git submodule update --remote dotbot, Updating dotbot]
