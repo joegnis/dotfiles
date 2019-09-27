@@ -57,7 +57,7 @@ if command_exists pyenv; then
     alias mkvirtualenv='pyenv virtualenv'
     alias lsvirtualenv='pyenv virtualenvs'
     alias rmvirtualenv='pyenv uninstall'
-    alias deactivate='pyenv deactivate'
+    alias pyenv-install='PYTHON_CONFIGURE_OPTS="--enable-shared" pyenv install'
 fi
 
 # bd. See https://github.com/vigneshwaranr/bd
@@ -80,5 +80,9 @@ fi
 
 # gitignore.io
 gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
+
+# CMake hunter
+export HUNTER_ROOT=~/.local/share/cmake-hunter
+[ -d $HUNTER_ROOT ] || mkdir "$HUNTER_ROOT"
 
 # vim: ft=sh
