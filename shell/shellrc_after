@@ -80,4 +80,9 @@ gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 export HUNTER_ROOT=~/.local/share/cmake-hunter
 [ -d $HUNTER_ROOT ] || mkdir "$HUNTER_ROOT"
 
+# Add HomeBrew sbin to PATH
+if [ $platform = "macos" ]; then
+    export PATH="/usr/local/sbin:$PATH"
+fi
+
 # vim: ft=sh
