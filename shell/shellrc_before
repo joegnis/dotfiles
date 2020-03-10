@@ -1,4 +1,5 @@
 # Shared config (loaded before other config) among shells
+## Usually put utility functions here
 command_exists() {
     command -v "$1" >/dev/null 2>&1
 }

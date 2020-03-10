@@ -1,7 +1,7 @@
 # Shared config among shells (loaded after other config but before local config at the end)
 
 # Load secrets
-if [ -f ~/.shell/secrets ]; then
+if [[ -f ~/.shell/secrets ]]; then
     source ~/.shell/secrets
 fi
 
@@ -10,15 +10,15 @@ export PATH=$PATH:$HOME/.local/bin
 
 # make `less` more friendly for non-text input files, see lesspipe(1)
 if command_exists lesspipe.sh; then
-    if [ $platform = "macos" ]; then
+    if [[ $platform = "macos" ]]; then
         export LESSOPEN="|/usr/local/bin/lesspipe.sh %s" LESS_ADVANCED_PREPROCESSOR=1
-    elif [ $platform = "linux" ]; then
+    elif [[ $platform = "linux" ]]; then
         eval "$(SHELL=/bin/sh lesspipe)"
     fi
 fi
 
 # Enable color support of ls and also add handy aliases
-if [ $platform = "linux" ]; then
+if [[ $platform = "linux" ]]; then
     if [ -x /usr/bin/dircolors ]; then
         test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
         alias ls='ls --color=auto'
@@ -28,7 +28,7 @@ if [ $platform = "linux" ]; then
         alias grep='grep --color=auto'    alias fgrep='fgrep --color=auto'
         alias egrep='egrep --color=auto'
     fi
-elif [ $platform = "macos" ]; then
+elif [[ $platform = "macos" ]]; then
     export CLICOLOR=1
     # hard-coded, search for LSCOLORS online for more
     export LSCOLORS="Gxfxcxdxbxegedabagacad"
@@ -70,21 +70,22 @@ if command_exists thefuck; then
 fi
 
 # autojump
-if [ $platform = "linux" ]; then
-    [ -f /usr/share/autojump/autojump.sh ] && source /usr/share/autojump/autojump.sh
-elif [ $platform = "macos" ]; then
-    [ -f /usr/local/etc/profile.d/autojump.sh ] && source /usr/local/etc/profile.d/autojump.sh
+if [[ $platform = "linux" ]]; then
+    [[ -f /usr/share/autojump/autojump.sh ]] && source /usr/share/autojump/autojump.sh
+elif [[ $platform = "macos" ]]; then
+    [[ -f /usr/local/etc/profile.d/autojump.sh ]] && source /usr/local/etc/profile.d/autojump.sh
 fi
 
 # gitignore.io
+## Todo: make it accept arguments delimited by spaces
 gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 
 # CMake hunter
 export HUNTER_ROOT=~/.local/share/cmake-hunter
-[ -d $HUNTER_ROOT ] || mkdir "$HUNTER_ROOT"
+[[ -d $HUNTER_ROOT ]] || mkdir "$HUNTER_ROOT"
 
 # Add HomeBrew sbin to PATH
-if [ $platform = "macos" ]; then
+if [[ $platform = "macos" ]]; then
     export PATH="/usr/local/sbin:$PATH"
 fi
 
