@@ -4,66 +4,64 @@
       relink: true
       force: true
 
-- clean: ['~']
+- clean: ["~"]
 
 - link:
     ~/.dotfiles:
-        path: ""
+      path: ""
     # Vim
     ~/.vimrc:
-        path: vim/vimrc
+      path: vim/vimrc
     ~/.vim/ftplugin:
-        path: vim/ftplugin
-    ~/.vim/UltiSnips:
-        path: vim/UltiSnips
+      path: vim/ftplugin
     ~/.vim/ftdetect:
-        path: vim/ftdetect
+      path: vim/ftdetect
     ~/.config/nvim/cquery-settings.json:
-        path: neovim/cquery-settings.json
+      path: neovim/cquery-settings.json
     # NeoVim
     ~/.config/nvim/init.vim:
-        path: neovim/init.vim
+      path: neovim/init.vim
     # Shells
     ~/.shell/shellrc_before:
-        path: shell/shellrc_before
+      path: shell/shellrc_before
     ~/.shell/aliases.sh:
-        path: shell/aliases.sh
+      path: shell/aliases.sh
     ~/.shell/shellrc_after:
-        path: shell/shellrc_after
+      path: shell/shellrc_after
     ~/.zshrc:
-        path: zsh/zshrc
+      path: zsh/zshrc
     ~/.zsh/antigenrc:
-        path: zsh/antigenrc
+      path: zsh/antigenrc
     ~/.zsh/themes:
-        path: zsh/themes
+      path: zsh/themes
     ~/.bashrc:
-        path: bash/bashrc
+      path: bash/bashrc
     ~/.bash_profile:
-        path: bash/bash_profile
+      path: bash/bash_profile
     ~/.bash/bashitrc:
-        path: bash/bashitrc
+      path: bash/bashitrc
     # Python
     ~/.config/flake8:
-        path: config/flake8
+      path: config/flake8
     # aria2
     ~/.aria2/aria2.conf:
-        path: aria2/aria2.conf
+      path: aria2/aria2.conf
     # tmux
     ~/.tmux.conf:
-        path: tmux/tmux.conf
+      path: tmux/tmux.conf
     ~/.tmux/tmuxifier_layouts/default.session.sh:
-        path: tmux/tmuxifier_layouts/default.session.sh
+      path: tmux/tmuxifier_layouts/default.session.sh
     # git
     ~/.gitconfig:
     # most
     ~/.mostrc:
-        path: most.rc
+      path: most.rc
     # cmake-format
     ~/.cmake-format.py:
-        path: cmake-format.py
+      path: cmake-format.py
     # clang-format
     ~/.clang-format:
-        path: clang-format
+      path: clang-format
 
 - shell:
     - [git submodule update --remote dotbot, Updating dotbot]

@@ -346,22 +346,6 @@ Plug 'vim-scripts/mru.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
-" Deoplete, auto-complete
-"" Requires Python3 support
-if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-    " Does not install for vim
-    " Plug 'Shougo/deoplete.nvim'
-    " Plug 'roxma/nvim-yarp'
-    " Plug 'roxma/vim-hug-neovim-rpc'
-endif
-Plug 'Shougo/neco-syntax'
-Plug 'Shougo/neco-vim'
-
-" Asynchronous linting
-Plug 'w0rp/ale'
-
 " Semantic syntax hightlighting for Clang
 if has('nvim')
     Plug 'arakashic/chromatica.nvim'
@@ -373,19 +357,7 @@ Plug 'rhysd/vim-clang-format'
 " Autoformatter (for every file type)
 Plug 'Chiel92/vim-autoformat'
 
-" CSS
-Plug 'othree/csscomplete.vim'
-
-" Language Client
-if has('nvim')
-    Plug 'autozimu/LanguageClient-neovim', {
-                \ 'branch': 'next',
-                \ 'do': 'bash install.sh',
-                \ }
-endif
-
 " Python
-Plug 'davidhalter/jedi-vim' | Plug 'lambdalisue/vim-pyenv' " Python
 Plug 'vim-python/python-syntax'
 
 " Text objects
@@ -418,10 +390,7 @@ Plug 'mhinz/vim-startify'
 " Local config
 Plug 'embear/vim-localvimrc'
 
-" ctag
-Plug 'majutsushi/tagbar'
-
-" Syntax highlighting
+" Syntax highlighting (for misc. lanugages)
 Plug 'chr4/nginx.vim'
 Plug 'pearofducks/ansible-vim'
 Plug 'vim-scripts/scons.vim'
@@ -435,17 +404,9 @@ Plug 'tpope/vim-repeat'
 
 " Misc
 Plug 'junegunn/goyo.vim'  " distraction-free mode
-Plug 'SirVer/ultisnips', { 'on': [] } " snippet engine without snippets
 
 " Initialize plugin system
 call plug#end()
-
-" Load some plugins the first time entering insert mode
-augroup load_after_insert
-    autocmd!
-    autocmd InsertEnter * call plug#load('ultisnips')
-                \| autocmd! load_after_insert
-augroup END
 
 " bufexplorer
 let g:bufExplorerShowRelativePath=1
@@ -484,34 +445,6 @@ let g:goyo_margin_top = 2
 let g:goyo_margin_bottom = 2
 nnoremap <silent> <leader>z :Goyo<cr>
 
-" jedi-vim
-" Moved to after/ftplugin/python.vim
-
-" vim-pyenv
-" Moved to after/ftplugin/python.vim
-
-" Clang language server cquery
-if has('nvim')
-    let g:LanguageClient_serverCommands = {
-                \ 'c': ['ccls', '--log-file=/tmp/cc.log'],
-                \ 'cpp': ['ccls', '--log-file=/tmp/cc.log'],
-                \ 'cuda': ['ccls', '--log-file=/tmp/cc.log'],
-                \ 'objc': ['ccls', '--log-file=/tmp/cc.log'],
-                \ }
-
-    let g:LanguageClient_loadSettings = 1 " Use an absolute configuration path if you want system-wide settings
-    let g:LanguageClient_settingsPath = expand('~/.config/nvim/ccls-settings.json')
-    let g:LanguageClient_hasSnippetSupport = 0
-    set completefunc=LanguageClient#complete
-    set formatexpr=LanguageClient_textDocument_rangeFormatting()
-
-    nnoremap <silent> gh :call LanguageClient#textDocument_hover()<CR>
-    nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-    nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
-    nnoremap <silent> gs :call LanguageClient#textDocument_documentSymbol()<CR>
-    nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-endif
-
 " Clang-format
 let g:clang_format#auto_format = 1
 
@@ -522,18 +455,10 @@ let g:autoformat_autoindent = 0
 autocmd BufWrite * :Autoformat
 " Download this formatter from https://github.com/ds26gte/scmindent
 " and put it in PATH
-let g:formatdef_scmindent = '"scmindent.rkt"'
-" scmindent formats comment, need to be addressed
-"let g:formatters_lisp = ['scmindent']
-"let g:formatters_scheme = ['scmindent']
-"let g:formatters_racket = ['scmindent']
 " Disable for some types as they are handled by Clang-format
 let g:formatters_cpp = []
 let g:formatters_c = []
 let g:formatters_objc = []
-" CMake
-"let g:formatdef_cmakeformat = '"cmake-format -"'
-"let g:formatters_cmake = ['cmakeformat']
 " Python
 let g:formatters_python = ['yapf']
 
@@ -545,24 +470,8 @@ if has('nvim')
     let g:chromatica#search_source_args=1
 endif
 
-" Async linting
-let g:ale_linters = {'cpp': ['ccls']}
-let g:ale_fixers = {'cpp': ['clang-format']}
-
 " python-syntax
 let python_highlight_all = 1
-
-" CSS complete
-augroup omnifunc
-    autocmd!
-    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
-augroup END
-
-" deoplete
-let g:deoplete#enable_at_startup = 1
-
-" TagBar
-nmap <leader>t :TagbarToggle<CR>
 
 " wordmotion
 let g:wordmotion_mappings = {
@@ -593,13 +502,6 @@ nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
 " ProSession
 let g:prosession_tmux_title = 1
 let g:prosession_on_startup = 0
-
-" UltiSnips
-let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
-let g:UltiSnipsExpandTrigger = '<c-j>'
-let g:UltiSnipsJumpForwardTrigger  = '<c-j>'
-let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
-let g:UltiSnipsListSnippets = '<c-l>'
 
 " Startify
 let startify_dir = expand('~/.vim/files/info')
@@ -763,10 +665,10 @@ endfunc
 " => Neovim Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use Python 3 installed by pyenv
-let g:python3_host_prog = expand("~/.pyenv/versions/3.7.1/bin/python")
+"let g:python3_host_prog = expand("~/.pyenv/versions/3.7.1/bin/python")
 
 " Use Python 2 installed by pyenv
-let g:python_host_prog = expand("~/.pyenv/versions/2.7.15/bin/python")
+"let g:python_host_prog = expand("~/.pyenv/versions/2.7.15/bin/python")
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
