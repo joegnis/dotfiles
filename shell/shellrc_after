@@ -47,12 +47,15 @@ if command_exists pyenv; then
     export PYENV_ROOT="$HOME/.pyenv"
     export PATH="$PYENV_ROOT/bin:$PATH"
     eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
-    alias workon='pyenv activate'
-    alias mkvirtualenv='pyenv virtualenv'
-    alias lsvirtualenv='pyenv virtualenvs'
-    alias rmvirtualenv='pyenv uninstall'
     alias pyenv-install='PYTHON_CONFIGURE_OPTS="--enable-shared" pyenv install'
+
+    if [[ -d $(pyenv root)/plugins/pyenv-virtualenv ]]; then
+        eval "$(pyenv virtualenv-init -)"
+        alias workon='pyenv activate'
+        alias mkvirtualenv='pyenv virtualenv'
+        alias lsvirtualenv='pyenv virtualenvs'
+        alias rmvirtualenv='pyenv uninstall'
+    fi
 fi
 
 # bd. See https://github.com/vigneshwaranr/bd
