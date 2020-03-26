@@ -89,4 +89,9 @@ if [[ $platform = "macos" ]]; then
     export PATH="/usr/local/sbin:$PATH"
 fi
 
+# Python poetry dependency manager
+if [[ -d "$HOME/.poetry/bin" ]]; then
+    export PATH="$HOME/.poetry/bin:$PATH"
+fi
+
 # vim: ft=sh
