@@ -1,4 +1,8 @@
 # Shared config among shells (loaded after other config but before local config at the end)
+# Tips
+#   - For tools not installed by package manager, we should test if its
+#     installation directory exists instead of if its executable exists,
+#     e.g. see tmuxifier part
 
 # Load secrets
 if [[ -f ~/.shell/secrets ]]; then
@@ -43,7 +47,7 @@ elif [[ $platform = "macos" ]]; then
 fi
 
 # tmuxifier
-if command_exists tmuxifier; then
+if [[ -d "$HOME/.tmux/tmuxifier" ]]; then
     export TMUXIFIER="$HOME/.tmux/tmuxifier"
     export PATH="$HOME/.tmux/tmuxifier/bin:$PATH"
     export TMUXIFIER_LAYOUT_PATH="$HOME/.tmux/tmuxifier_layouts"
@@ -100,6 +104,11 @@ fi
 # Python poetry dependency manager
 if [[ -d "$HOME/.poetry/bin" ]]; then
     export PATH="$HOME/.poetry/bin:$PATH"
+fi
+
+# OpenResty
+if [[ -d /opt/openresty ]]; then
+    export PATH="/opt/openresty/bin:/opt/openresty/nginx/sbin:$PATH"
 fi
 
 # vim: ft=sh

@@ -17,6 +17,9 @@ antigen bundle tonyseek/oh-my-zsh-virtualenv-prompt
 # Quickly go back to a specific parent directory
 antigen bundle Tarrasch/zsh-bd
 
+# Quickly jump to directories
+antigen bundle agkozak/zsh-z
+
 # Load the theme.
 antigen theme ys
 
