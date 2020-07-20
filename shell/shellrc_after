@@ -5,6 +5,14 @@ if [[ -f ~/.shell/secrets ]]; then
     source ~/.shell/secrets
 fi
 
+if command_exists nvim; then
+    export EDITOR=nvim
+elif command_exists vim; then
+    export EDITOR=vim
+else:
+    export EDITOR=vi
+fi
+
 # Add local bin dir to path
 export PATH=$PATH:$HOME/.local/bin
 
