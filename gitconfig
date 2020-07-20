@@ -28,4 +28,7 @@
 [commit]
 	gpgsign = true
 
+[pull]
+	rebase = false
+
 # vi: ft=gitconfig
