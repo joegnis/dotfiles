@@ -1,20 +1,20 @@
 [user]
-	useConfigOnly = true
+    useConfigOnly = true
 
-[user "github"]
-	name = Kai Liao
-	email = joegnis@pm.me
-	signingkey = 8820C5922A6FDF36
+[user "default"]
+    name = Kai Liao
+    email = joegnis@pm.me
+    signingkey = 550F850006FFFFD9
 
 [alias]
-	st = status
-	unstage = reset HEAD --
-	last = log -1 HEAD
-	visual = !gitk
-	ci = commit
+    st = status
+    unstage = reset HEAD --
+    last = log -1 HEAD
+    visual = !gitk
+    ci = commit
     co = checkout
     diffc = diff --cached
-	set-identity = "! git config user.name \"$(git config user.$1.name)\"; git config user.email \"$(git config user.$1.email)\"; git config user.signingkey \"$(git config user.$1.signingkey)\"; :"
+    set-identity = "! git config user.name \"$(git config user.$1.name)\"; git config user.email \"$(git config user.$1.email)\"; git config user.signingkey \"$(git config user.$1.signingkey)\"; :"
 
 [core]
     editor = nvim
