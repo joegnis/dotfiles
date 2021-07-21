@@ -111,4 +111,15 @@ if [[ -d /opt/openresty ]]; then
     export PATH="/opt/openresty/bin:/opt/openresty/nginx/sbin:$PATH"
 fi
 
+# ArgyllCMS
+if [[ $platform = "macos" ]]; then
+    argyll_dir="$HOME/.local/share/Argyll"
+    if [[ -d "$argyll_dir" ]]; then
+        export PATH="$PATH:$argyll_dir/current/bin"
+    fi
+fi
+
+# GPG
+export GPG_TTY=$(tty)
+
 # vim: ft=sh
