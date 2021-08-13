@@ -13,7 +13,7 @@ if command_exists nvim; then
     export EDITOR=nvim
 elif command_exists vim; then
     export EDITOR=vim
-else:
+else
     export EDITOR=vi
 fi
 
