@@ -56,11 +56,12 @@ fi
 
 # pyenv
 if command_exists pyenv; then
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
+    if [[ -z "$PYENV_ROOT" ]]; then
+        export PYENV_ROOT="$HOME/.pyenv"
+        export PATH="$PYENV_ROOT/bin:$PATH"
+    fi
+    eval "$(pyenv init --path)"
     eval "$(pyenv init -)"
-    alias pyenv-install='PYTHON_CONFIGURE_OPTS="--enable-shared" pyenv install'
-
     if [[ -d $(pyenv root)/plugins/pyenv-virtualenv ]]; then
         eval "$(pyenv virtualenv-init -)"
         alias workon='pyenv activate'
