@@ -120,6 +120,12 @@ if [[ $platform = "macos" ]]; then
     fi
 fi
 
+# jenv (Manages Java Environment)
+if command_exists jenv; then
+    export PATH="$HOME/.jenv/bin:$PATH"
+    eval "$(jenv init -)"
+fi
+
 # GPG
 export GPG_TTY=$(tty)
 
