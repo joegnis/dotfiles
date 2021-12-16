@@ -1,15 +1,12 @@
 [user]
     useConfigOnly = true
+	name = joegnis
+	email = joegnis@pm.me
 
 [user "joegnis"]
     name = Kai Liao
     email = joegnis@pm.me
     signingkey = 550F850006FFFFD9
-
-[user "neu"]
-    name = Kai Liao
-    email = liao.yan@northeastern.edu
-    signingkey = 2AA36F6A7E1C84B9
 
 [alias]
     st = status
