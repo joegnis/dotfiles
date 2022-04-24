@@ -129,4 +129,9 @@ fi
 # GPG
 export GPG_TTY=$(tty)
 
+# Qt
+if [[ -d "$HOME/.local/share/Qt" ]]; then
+    export QT_ROOT="$HOME/.local/share/Qt"
+fi
+
 # vim: ft=sh
