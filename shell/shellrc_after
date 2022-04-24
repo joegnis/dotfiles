@@ -134,4 +134,9 @@ if [[ -d "$HOME/.local/share/Qt" ]]; then
     export QT_ROOT="$HOME/.local/share/Qt"
 fi
 
+# Doom-emacs
+if [[ -d "$HOME/.doom.d" ]]; then
+    export PATH="$HOME/.emacs.d/bin:$PATH"
+fi
+
 # vim: ft=sh
