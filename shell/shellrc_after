@@ -55,7 +55,7 @@ if [[ -d "$HOME/.tmux/tmuxifier" ]]; then
 fi
 
 # pyenv
-if command_exists pyenv; then
+if [[ -d "$HOME/.pyenv" ]]; then
     if [[ -z "$PYENV_ROOT" ]]; then
         export PYENV_ROOT="$HOME/.pyenv"
         export PATH="$PYENV_ROOT/bin:$PATH"
