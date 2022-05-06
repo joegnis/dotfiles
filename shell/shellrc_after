@@ -137,7 +137,8 @@ if command_exists jenv; then
 fi
 
 # GPG
-export GPG_TTY=$(tty)
+export GPG_TTY
+GPG_TTY=$(tty)
 
 # Qt
 if [[ -d "$HOME/.local/share/Qt" ]]; then
