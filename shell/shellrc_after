@@ -107,6 +107,16 @@ if [[ -d "$HOME/.poetry/bin" ]]; then
     export PATH="$HOME/.poetry/bin:$PATH"
 fi
 
+# Python pdm
+if [[ -d "$HOME/Library/Python/3.9/bin" ]]; then
+    export PATH="$HOME/Library/Python/3.9/bin:$PATH"
+fi
+if [ -n "$PYTHONPATH" ]; then
+    export PYTHONPATH="$HOME/Library/Application Support/pdm/venv/lib/python3.9/site-packages/pdm/pep582":$PYTHONPATH
+else
+    export PYTHONPATH="$HOME/Library/Application Support/pdm/venv/lib/python3.9/site-packages/pdm/pep582"
+fi
+
 # OpenResty
 if [[ -d /opt/openresty ]]; then
     export PATH="/opt/openresty/bin:/opt/openresty/nginx/sbin:$PATH"
