@@ -150,4 +150,10 @@ if [[ -d "$HOME/.doom.d" ]]; then
     export PATH="$HOME/.emacs.d/bin:$PATH"
 fi
 
+# pnpm
+if command_exists pnpm; then
+    export PNPM_HOME="$HOME/.local/share/pnpm"
+    export PATH="$PNPM_HOME:$PATH"
+fi
+
 # vim: ft=sh
