@@ -62,6 +62,7 @@
     # clang-format
     ~/.clang-format:
       path: clang-format
+    ~/.editorconfig:
 
 - shell:
     - [git submodule update --remote dotbot, Updating dotbot]
