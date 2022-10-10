@@ -37,7 +37,8 @@ if [[ $platform = "linux" ]]; then
         alias dir='dir --color=auto'
         alias vdir='vdir --color=auto'
 
-        alias grep='grep --color=auto'    alias fgrep='fgrep --color=auto'
+        alias grep='grep --color=auto'
+        alias fgrep='fgrep --color=auto'
         alias egrep='egrep --color=auto'
     fi
 elif [[ $platform = "macos" ]]; then
@@ -94,8 +95,9 @@ fi
 gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 
 # CMake hunter
-export HUNTER_ROOT=~/.local/share/cmake-hunter
-[[ -d $HUNTER_ROOT ]] || mkdir "$HUNTER_ROOT"
+if [[ -d "$HOME/.hunter" ]]; then
+    export HUNTER_ROOT="$HOME/.hunter"
+fi
 
 # Add HomeBrew sbin to PATH
 if [[ $platform = "macos" ]]; then
