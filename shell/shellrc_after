@@ -131,4 +131,9 @@ fi
 # GPG
 export GPG_TTY=$(tty)
 
+# luarocks
+if command_exists luarocks; then
+    export PATH="$HOME/.luarocks/bin:$PATH"
+fi
+
 # vim: ft=sh
