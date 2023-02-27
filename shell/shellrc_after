@@ -136,4 +136,9 @@ if command_exists luarocks; then
     export PATH="$HOME/.luarocks/bin:$PATH"
 fi
 
+# coursier (Scala)
+if command_exists coursier; then
+    export PATH="$PATH:$HOME/.local/share/coursier/bin"
+fi
+
 # vim: ft=sh
