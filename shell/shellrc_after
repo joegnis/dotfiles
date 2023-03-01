@@ -138,7 +138,7 @@ fi
 
 # coursier (Scala)
 if command_exists coursier; then
-    export PATH="$PATH:$HOME/.local/share/coursier/bin"
+    export PATH="$HOME/.local/share/coursier/bin:$PATH"
 fi
 
 # vim: ft=sh
