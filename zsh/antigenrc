@@ -23,11 +23,6 @@ antigen bundle agkozak/zsh-z
 # Load the theme.
 antigen theme ys
 
-# Allow local customizations in ~/.zsh/antigenrc_local
-if [ -f ~/.zsh/antigenrc_local ]; then
-    source ~/.zsh/antigenrc_local
-fi
-
 # Tell antigen that you're done.
 antigen apply
 

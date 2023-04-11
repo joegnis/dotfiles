@@ -20,6 +20,7 @@
 
 [core]
     editor = nvim
+	autocrlf = input
 
 [merge]
     conflictstyle = diff3

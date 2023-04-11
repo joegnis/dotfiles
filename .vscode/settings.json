@@ -4,5 +4,6 @@
     "*zshrc": "shellscript",
     "*antigenrc": "shellscript",
     "*vimrc": "viml"
-  }
+  },
+  "C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools"
 }
