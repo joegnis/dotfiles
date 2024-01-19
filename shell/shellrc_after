@@ -163,9 +163,24 @@ if command_exists direnv; then
     eval "$(direnv hook bash)"
 fi
 
+# luaenv
+if [[ -d "$HOME/.luaenv" ]]; then
+    export PATH="$HOME/.luaenv/bin:$PATH"
+    eval "$(luaenv init -)"
+fi
+
 # luarocks
-if command_exists luarocks; then
-    export PATH="$HOME/.luarocks/bin:$PATH"
+LUAROCKS_DIR="$HOME/.local/share/luarocks"
+if [[ -d "$LUAROCKS_DIR" ]]; then
+    if [[ -d "$LUAROCKS_DIR/current-lua5.1" ]]; then
+        alias luarocks51="$LUAROCKS_DIR/current-lua5.1/bin/luarocks"
+    fi
+    if [[ -d "$LUAROCKS_DIR/current-lua5.3" ]]; then
+        alias luarocks53="$LUAROCKS_DIR/current-lua5.3/bin/luarocks"
+    fi
+    if [[ -d "$LUAROCKS_DIR/current-lua5.4" ]]; then
+        alias luarocks54="$LUAROCKS_DIR/current-lua5.4/bin/luarocks"
+    fi
 fi
 
 # coursier (Scala)
@@ -175,6 +190,12 @@ if command_exists coursier; then
     elif [[ -d "$HOME/Library/Application Support/Coursier/bin" ]]; then
         export PATH="$HOME/Library/Application Support/Coursier/bin:$PATH"
     fi
+fi
+
+# sdkman
+if [[ -d "$HOME/.sdkman/bin" ]]; then
+    export SDKMAN_DIR="$HOME/.sdkman"
+    [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 fi
 
 # vim: ft=sh
