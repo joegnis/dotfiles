@@ -41,6 +41,11 @@ if [ -f ~/.shell/shellrc_local_after ]; then
     source ~/.shell/shellrc_local_after
 fi
 
+# direnv
+if command_exists direnv; then
+    eval "$(direnv hook zsh)"
+fi
+
 # Allow local customizations in the ~/.zshrc_local_after file
 if [ -f ~/.zshrc_local_after ]; then
     source ~/.zshrc_local_after

@@ -85,6 +85,11 @@ if [ -f ~/.shell/shellrc_local_after ]; then
     source ~/.shell/shellrc_local_after
 fi
 
+# direnv
+if command_exists direnv; then
+    eval "$(direnv hook bash)"
+fi
+
 # Allow local customizations in the ~/.bashrc_local_after file
 if [ -f ~/.bashrc_local_after ]; then
     source ~/.bashrc_local_after

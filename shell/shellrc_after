@@ -158,11 +158,6 @@ if command_exists pnpm; then
     export PATH="$PNPM_HOME:$PATH"
 fi
 
-# direnv
-if command_exists direnv; then
-    eval "$(direnv hook bash)"
-fi
-
 # luaenv
 if [[ -d "$HOME/.luaenv" ]]; then
     export PATH="$HOME/.luaenv/bin:$PATH"
