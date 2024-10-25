@@ -5,7 +5,9 @@ command_exists() {
 }
 
 get_platform() {
-    if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    if [[ -e /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
+        echo "wsl"
+    elif [[ "$OSTYPE" == "linux-gnu" ]]; then
         echo "linux"
     elif [[ "$OSTYPE" == "darwin"* ]]; then
         echo "macos"
