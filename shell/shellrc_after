@@ -198,4 +198,17 @@ if [[ -d "$HOME/.sdkman/bin" ]]; then
     [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 fi
 
+# acme (tls certificate issue&renew)
+if [[ -d "$HOME/.acme.sh" ]]; then
+    source "$HOME/.acme.sh/acme.sh.env"
+fi
+
+# tcl/tkinter
+if [[ -d /usr/share/tcltk/tcl8.6 ]]; then
+   export TCL_LIBRARY=/usr/share/tcltk/tcl8.6
+fi
+if [[ -d /usr/share/tcltk/tk8.6 ]]; then
+   export TK_LIBRARY=/usr/share/tcltk/tk8.6
+fi
+
 # vim: ft=sh
