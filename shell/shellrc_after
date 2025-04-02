@@ -23,7 +23,7 @@ export PATH=$PATH:$HOME/.local/bin
 # ssh-agent
 # Run `ssh-add` manually to add private keys
 if command_exists ssh-agent; then
-    eval `ssh-agent`
+    eval "$(ssh-agent)" > /dev/null
 fi
 
 # WSL
