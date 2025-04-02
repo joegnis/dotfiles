@@ -20,6 +20,12 @@ fi
 # Add local bin dir to path
 export PATH=$PATH:$HOME/.local/bin
 
+# ssh-agent
+# Run `ssh-add` manually to add private keys
+if command_exists ssh-agent; then
+    eval `ssh-agent`
+fi
+
 # WSL
 if [[ $platform = "wsl" ]]; then
     # C:\Users\xxx
@@ -30,15 +36,6 @@ if [[ $platform = "wsl" ]]; then
     # Removes pyenv-win paths
     PATH=$(echo "$PATH" | sed -e "s|:$win_home/.pyenv/pyenv-win/bin||")
     export PATH=$(echo "$PATH" | sed -e "s|:$win_home/.pyenv/pyenv-win/shims||")
-fi
-
-# make `less` more friendly for non-text input files, see lesspipe(1)
-if command_exists lesspipe.sh; then
-    if [[ $platform = "macos" ]]; then
-        export LESSOPEN="|/usr/local/bin/lesspipe.sh %s" LESS_ADVANCED_PREPROCESSOR=1
-    elif [[ $platform = "linux" ]]; then
-        eval "$(SHELL=/bin/sh lesspipe)"
-    fi
 fi
 
 # Enable color support of ls and also add handy aliases
