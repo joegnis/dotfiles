@@ -30,6 +30,21 @@ export EDITOR=vim
 # iTerm 2
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+# direnv
+if command_exists direnv; then
+    eval "$(direnv hook zsh)"
+fi
+
+# lesspipe
+# make `less` more friendly for non-text input files, see lesspipe(1)
+if command_exists lesspipe.sh; then
+    if [[ $platform = "macos" ]]; then
+        export LESSOPEN="|/usr/local/bin/lesspipe.sh %s" LESS_ADVANCED_PREPROCESSOR=1
+    elif [[ $platform = "linux" ]]; then
+        lesspipe.sh | source /dev/stdin
+    fi
+fi
+
 # Allow customizations for both zsh and bash
 if [ -f ~/.shell/shellrc_after ]; then
     source ~/.shell/shellrc_after
@@ -39,11 +54,6 @@ fi
 # in the ~/.shell/shellrc_local_after file
 if [ -f ~/.shell/shellrc_local_after ]; then
     source ~/.shell/shellrc_local_after
-fi
-
-# direnv
-if command_exists direnv; then
-    eval "$(direnv hook zsh)"
 fi
 
 # Allow local customizations in the ~/.zshrc_local_after file

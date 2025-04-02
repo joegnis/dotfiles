@@ -74,6 +74,21 @@ elif [ $platform = "macos" ]; then
     fi
 fi
 
+# direnv
+if command_exists direnv; then
+    eval "$(direnv hook bash)"
+fi
+
+# lesspipe
+# make `less` more friendly for non-text input files, see lesspipe(1)
+if command_exists lesspipe.sh; then
+    if [[ $platform = "macos" ]]; then
+        export LESSOPEN="|/usr/local/bin/lesspipe.sh %s" LESS_ADVANCED_PREPROCESSOR=1
+    elif [[ $platform = "linux" ]]; then
+        eval "$(lesspipe.sh)"
+    fi
+fi
+
 # Allow customizations for both zsh and bash
 if [ -f ~/.shell/shellrc_after ]; then
     source ~/.shell/shellrc_after
@@ -83,11 +98,6 @@ fi
 # in the ~/.shell/shellrc_local_after file
 if [ -f ~/.shell/shellrc_local_after ]; then
     source ~/.shell/shellrc_local_after
-fi
-
-# direnv
-if command_exists direnv; then
-    eval "$(direnv hook bash)"
 fi
 
 # Allow local customizations in the ~/.bashrc_local_after file
