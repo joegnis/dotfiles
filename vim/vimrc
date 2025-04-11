@@ -203,13 +203,16 @@ set si "Smart indent
 set wrap "Wrap lines
 
 " Access to system clipboard
-if !has("clipboard")
-    echoerr "clipboard option not installed in current Vim,
-                \ thus no access to system clipboard"
+if has("clipboard")
+    noremap <leader>y "+y
+    noremap <leader>yy "+Y
+    noremap <leader>Y "+Y
+else
+    noremap <leader>p :set paste<CR>"+gP:set nopaste<CR>
+    noremap <leader>yy Y:echo "Warning: no system clipboard"<CR>
+    noremap <leader>Y Y:echo "Warning: no system clipboard"<CR>
+    noremap <leader>p p:echo "Warning: no system clipboard"<CR>
 endif
-noremap <leader>y "+y
-noremap <leader>yy "+Y
-noremap <leader>p :set paste<CR>"+gP:set nopaste<CR>
 
 
 """"""""""""""""""""""""""""""
