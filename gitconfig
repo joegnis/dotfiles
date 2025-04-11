@@ -1,11 +1,11 @@
 [user]
     useConfigOnly = true
 	name = joegnis
-	email = joegnis@pm.me
+	email = joegnis_gh@fastmail.com
 
 [user "joegnis"]
     name = Kai Liao
-    email = joegnis@pm.me
+    email = joegnis_gh@fastmail.com
     signingkey = 550F850006FFFFD9
 
 [alias]
